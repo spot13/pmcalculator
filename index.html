@@ -1,0 +1,86 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>PHP-FPM Process Caluculator</title>
+  <meta name="description" content="">
+  <meta name="author" content="Chris Moore">
+
+</head>
+
+<body>
+
+  
+  <form name="form1" method="post" action="" >
+    <table>
+    <tr><td><strong>Total Ram:</strong></td><td><input type="text" name="ram-total" id="ram-total" /></td></tr>
+    <tr><td><strong>Reserved:</strong></td><td><input type="text" name="ram-reserved" id="ram-reserved" /></td></tr>
+    <tr><td><strong>Buffer:</strong></td><td><input type="text" name="ram-buffer" id="ram-buffer" />%</td></tr>
+    <tr><td><strong>Process size:</strong></td><td><input type="text" name="process-size" id="process-size" /> MB</td></tr>
+
+
+    <!--<tr><td>Buffer Percent:</td><td><input type="text" name="ram-buffer-percent" id="ram-buffer-percent" readonly /></td></tr>-->
+
+    <tr><td>Available:</td><td><input type="text" name="ram-available" id="ram-available" readonly /> Gb</td></tr>
+    <tr><td>Available:</td><td><input type="text" name="ram-available-mb" id="ram-available-mb" readonly /> Mb</td></tr>
+
+    
+
+    <tr><td>Max children:</td><td><input type="text" name="max-children" id="max-children" readonly /></td></tr>
+    <tr><td>Start servers:</td><td><input type="text" name="start-servers" id="start-servers" readonly /></td></tr>
+    <tr><td>Min spare:</td><td><input type="text" name="min-spare" id="min-spare" readonly /></td></tr>
+    <tr><td>Max spare:</td><td><input type="text" name="max-spare" id="max-spare" readonly /></td></tr>
+    </table>
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    //this calculates values automatically 
+    sum();
+    $("#ram-total, #ram-reserved, #ram-buffer, #process-size").on("keydown keyup", function() {
+        sum();
+    });
+});
+
+function sum() {
+      //inputs
+      var ramtotal = document.getElementById('ram-total').value;
+      var ramreserved = document.getElementById('ram-reserved').value;
+      var rambuffer = document.getElementById('ram-buffer').value;
+      var processsize = document.getElementById('process-size').value;
+
+      
+
+      var buffer = 1 - (rambuffer / 100) ;
+
+      //[Total Available RAM] – [Reserved RAM] – [10% buffer] = [Available RAM for PHP]
+      var availableram = Math.round(((ramtotal - ramreserved) * buffer) * 10) / 10;
+      var availablerammb = Math.round(availableram * 1024);
+
+      // [Average Process Size] / [Available RAM for PHP]= [max_children]
+      var maxchildren =  Math.floor(availablerammb / processsize);
+      var startservers = Math.floor(maxchildren * 0.25);
+      var minspare = Math.floor(maxchildren * 0.25);
+      var maxspare = Math.floor(maxchildren * 0.75);
+
+
+        if (!isNaN(availableram)) {
+              //Outputs
+              //document.getElementById('ram-buffer-percent').value = buffer;
+              document.getElementById('ram-available').value = availableram;
+              document.getElementById('ram-available-mb').value = Math.round(availableram * 1024);
+              document.getElementById('max-children').value = maxchildren;
+              document.getElementById('start-servers').value = startservers;
+              document.getElementById('min-spare').value = minspare;
+              document.getElementById('max-spare').value = maxspare;
+            }
+          }
+</script>
+
+</body>
+</html>
