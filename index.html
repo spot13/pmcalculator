@@ -8,15 +8,127 @@
   <meta name="description" content="">
   <meta name="author" content="Chris Moore">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+
+
 </head>
 
 <body>
 
+
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+    <form method="post">
+     <div class="form-group ">
+      <label class="control-label requiredField" for="ram-total">
+       Total Ram (Gb)
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="ram-total" name="ram-total" type="range" min="1" max="64" step="1" />
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="name">
+       Reserved Ram (Gb)
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="name" name="name" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="text">
+       RAM Buffer (%)
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="input-group">
+       <div class="input-group-addon">
+        <i class="fa ">
+        </i>
+       </div>
+       <input class="form-control" id="text" name="text" type="text"/>
+       <div class="input-group-addon">
+        %
+       </div>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="text1">
+       Process size (Mb)
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="text1" name="text1" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="name1">
+       Available RAM (Gb)
+      </label>
+      <input class="form-control" id="name1" name="name1" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="name2">
+       Available RAM (Mb)
+      </label>
+      <input class="form-control" id="name2" name="name2" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="text2">
+       pm.max_children
+      </label>
+      <input class="form-control" id="text2" name="text2" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="text3">
+       pm.start_servers
+      </label>
+      <input class="form-control" id="text3" name="text3" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="text4">
+       pm.min_spare_servers
+      </label>
+      <input class="form-control" id="text4" name="text4" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="text5">
+       pm.max_spare_servers
+      </label>
+      <input class="form-control" id="text5" name="text5" type="text"/>
+     </div>
+     <div class="form-group">
+      <div>
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+  <!--OG-->
+
   
   <form name="form1" method="post" action="" >
     <table>
-    <tr><td><strong>Total Ram:</strong></td><td><input type="text" name="ram-total" id="ram-total" /></td></tr>
-    <tr><td><strong>Reserved:</strong></td><td><input type="text" name="ram-reserved" id="ram-reserved" /></td></tr>
+    <tr><td><strong>Total Ram:</strong></td><td><input type="text" name="ram-total" id="ram-total" />GB</td></tr>
+    <tr><td><strong>Reserved:</strong></td><td><input type="text" name="ram-reserved" id="ram-reserved" />GB</td></tr>
     <tr><td><strong>Buffer:</strong></td><td><input type="text" name="ram-buffer" id="ram-buffer" />%</td></tr>
     <tr><td><strong>Process size:</strong></td><td><input type="text" name="process-size" id="process-size" /> MB</td></tr>
 
@@ -35,8 +147,9 @@
     </table>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   
 <script>
 
 $(document).ready(function() {
