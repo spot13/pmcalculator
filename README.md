@@ -1,7 +1,7 @@
-# pmcalculator :v:
+# pmcalculator 🏗️
 A simple process manager calculator that helps determine the correct values for child processes in PHP-FPM.
 
-# Usage 🏗️
+# Usage :v:
 
 To find the correct process manager values, you will have to measure how much memory the average process consumes. This may not always be possible unless the process uses very stable and repeating memory amounts. For environments with many different processes, such as shared hosting environments, it may be better to monitor  the processes, noting peaks every so often in order to calculate an average.
 Using the process status (ps) command in Linux, sorting by RSS (Resident Set Size) to show the process with the highest memory usage first.
