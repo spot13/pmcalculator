@@ -1,199 +1,99 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
   <title>PHP-FPM Process Caluculator</title>
   <meta name="description" content="">
   <meta name="author" content="Chris Moore">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
-<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-
-<!-- Inline CSS based on choices in "Settings" tab -->
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
-
-<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.0/rangeslider.min.css" />
+<link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-
-
-<div class="bootstrap-iso">
- <div class="container-fluid">
+<div class="container-fluid">
+  <div class="row justify-content-center">
+     <div class="col-md-6">
+      <div class="card">
+    <header class="card-header">
+      <h4 class="card-title mt-2">PHP-FPM Process Calculator</h4>
+    </header>
   <div class="row">
-   <div class="col-md-6 col-sm-6 col-xs-12">
-    <form method="post">
+   <div class="col-md-12 col-sm-12= col-xs-12 form-container">
+    <form name="form1" method="post">
      <div class="form-group ">
       <label class="control-label requiredField" for="ram-total">
        Total Ram (Gb)
-       <span class="asteriskField">
-        *
-       </span>
       </label>
-      <input class="form-control" id="ram-total" name="ram-total" type="range" min="1" max="64" step="1" />
+      <input class="form-control" id="ram-total" name="ram-total" type="range" min="1" max="64" step="1" value="4" aria-readonly="true" readonly />
      </div>
      <div class="form-group ">
-      <label class="control-label requiredField" for="name">
+      <label class="control-label requiredField" for="ram-total">
        Reserved Ram (Gb)
-       <span class="asteriskField">
-        *
-       </span>
       </label>
-      <input class="form-control" id="name" name="name" type="text"/>
+      <input class="form-control" id="ram-reserved" name="ram-reserved" type="range" min="1" max="64" step="1" value="1" aria-readonly="true" readonly />
      </div>
      <div class="form-group ">
-      <label class="control-label requiredField" for="text">
+      <label class="control-label requiredField" for="ram-buffer">
        RAM Buffer (%)
-       <span class="asteriskField">
-        *
-       </span>
       </label>
       <div class="input-group">
-       <div class="input-group-addon">
-        <i class="fa ">
-        </i>
-       </div>
-       <input class="form-control" id="text" name="text" type="text"/>
-       <div class="input-group-addon">
-        %
-       </div>
+       <input class="form-control" id="ram-buffer" name="ram-buffer" type="range" min="1" max="100" step="1" value="10" aria-readonly="true" readonly />
       </div>
      </div>
      <div class="form-group ">
-      <label class="control-label requiredField" for="text1">
+      <label class="control-label requiredField" for="process-size">
        Process size (Mb)
-       <span class="asteriskField">
-        *
-       </span>
       </label>
-      <input class="form-control" id="text1" name="text1" type="text"/>
-     </div>
-     <div class="form-group ">
-      <label class="control-label " for="name1">
-       Available RAM (Gb)
-      </label>
-      <input class="form-control" id="name1" name="name1" type="text"/>
-     </div>
-     <div class="form-group ">
-      <label class="control-label " for="name2">
-       Available RAM (Mb)
-      </label>
-      <input class="form-control" id="name2" name="name2" type="text"/>
-     </div>
-     <div class="form-group ">
-      <label class="control-label " for="text2">
-       pm.max_children
-      </label>
-      <input class="form-control" id="text2" name="text2" type="text"/>
-     </div>
-     <div class="form-group ">
-      <label class="control-label " for="text3">
-       pm.start_servers
-      </label>
-      <input class="form-control" id="text3" name="text3" type="text"/>
-     </div>
-     <div class="form-group ">
-      <label class="control-label " for="text4">
-       pm.min_spare_servers
-      </label>
-      <input class="form-control" id="text4" name="text4" type="text"/>
-     </div>
-     <div class="form-group ">
-      <label class="control-label " for="text5">
-       pm.max_spare_servers
-      </label>
-      <input class="form-control" id="text5" name="text5" type="text"/>
+      <input class="form-control" id="process-size" name="process-size" type="range" min="1" max="1024" step="1" value="32" aria-readonly="true" readonly />
      </div>
      <div class="form-group">
-      <div>
-      </div>
+      <label class="control-label " for="ram-available">
+       Available RAM (Gb)
+      </label>
+      <input class="form-control" id="ram-available" name="ram-available" type="text" aria-readonly="true" readonly />
      </div>
+     <div class="form-group ">
+      <label class="control-label " for="ram-available-mb">
+       Available RAM (Mb)
+      </label>
+      <input class="form-control" id="ram-available-mb" name="ram-available-mb" type="text"aria-readonly="true" readonly />
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="max-children">
+       pm.max_children
+      </label>
+      <input class="form-control" id="max-children" name="max-children" type="text" aria-readonly="true" readonly />
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="start-servers">
+       pm.start_servers
+      </label>
+      <input class="form-control" id="start-servers" name="start-servers" type="text" aria-readonly="true" readonly />
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="min-spare">
+       pm.min_spare_servers
+      </label>
+      <input class="form-control" id="min-spare" name="min-spare" type="text" aria-readonly="true" readonly />
+     </div>
+     <div class="form-group ">
+      <label class="control-label " for="max-spare">
+       pm.max_spare_servers
+      </label>
+      <input class="form-control" id="max-spare" name="max-spare" type="text" aria-readonly="true" readonly />
+     </div>
+
     </form>
    </div>
   </div>
  </div>
+<div class="footer">&copy; <a href="https://chrismoore.ca">Chris Moore</a> <a class="github" href="https://github.com/spot13" target="_blank" rel="noopener" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 100 100"><path fill-rule="evenodd" clip-rule="evenodd" d="M49.998 11.963C28.461 11.963 11 29.425 11 50.965c0 17.231 11.172 31.849 26.671 37.003 1.952.361 2.662-.84 2.662-1.877 0-.924-.034-3.375-.051-6.633-10.849 2.359-13.138-5.229-13.138-5.229-1.774-4.505-4.331-5.703-4.331-5.703-3.541-2.418.269-2.371.269-2.371 3.914.277 5.974 4.018 5.974 4.018 3.478 5.96 9.129 4.235 11.35 3.243.353-2.525 1.363-4.24 2.476-5.217-8.659-.984-17.763-4.33-17.763-19.274 0-4.259 1.519-7.741 4.013-10.468-.399-.982-1.74-4.947.383-10.319 0 0 3.274-1.048 10.726 4.001 3.109-.869 6.446-1.303 9.763-1.316 3.312.014 6.65.447 9.763 1.316 7.447-5.049 10.716-4.001 10.716-4.001 2.128 5.372.788 9.337.388 10.319 2.5 2.727 4.008 6.209 4.008 10.468 0 14.979-9.117 18.279-17.805 19.241 1.398 1.205 2.646 3.59 2.646 7.229 0 5.211-.047 9.416-.047 10.695 0 1.045.701 2.26 2.681 1.873C77.836 82.798 89 68.191 89 50.965c0-21.54-17.461-39.002-39.002-39.002z"></path></svg></a></div>
 </div>
-
-
-  <!--OG-->
-
-  
-  <form name="form1" method="post" action="" >
-    <table>
-    <tr><td><strong>Total Ram:</strong></td><td><input type="text" name="ram-total" id="ram-total" />GB</td></tr>
-    <tr><td><strong>Reserved:</strong></td><td><input type="text" name="ram-reserved" id="ram-reserved" />GB</td></tr>
-    <tr><td><strong>Buffer:</strong></td><td><input type="text" name="ram-buffer" id="ram-buffer" />%</td></tr>
-    <tr><td><strong>Process size:</strong></td><td><input type="text" name="process-size" id="process-size" /> MB</td></tr>
-
-
-    <!--<tr><td>Buffer Percent:</td><td><input type="text" name="ram-buffer-percent" id="ram-buffer-percent" readonly /></td></tr>-->
-
-    <tr><td>Available:</td><td><input type="text" name="ram-available" id="ram-available" readonly /> Gb</td></tr>
-    <tr><td>Available:</td><td><input type="text" name="ram-available-mb" id="ram-available-mb" readonly /> Mb</td></tr>
-
-    
-
-    <tr><td>Max children:</td><td><input type="text" name="max-children" id="max-children" readonly /></td></tr>
-    <tr><td>Start servers:</td><td><input type="text" name="start-servers" id="start-servers" readonly /></td></tr>
-    <tr><td>Min spare:</td><td><input type="text" name="min-spare" id="min-spare" readonly /></td></tr>
-    <tr><td>Max spare:</td><td><input type="text" name="max-spare" id="max-spare" readonly /></td></tr>
-    </table>
-    </form>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
-   
-<script>
-
-$(document).ready(function() {
-    //this calculates values automatically 
-    sum();
-    $("#ram-total, #ram-reserved, #ram-buffer, #process-size").on("keydown keyup", function() {
-        sum();
-    });
-});
-
-function sum() {
-      //inputs
-      var ramtotal = document.getElementById('ram-total').value;
-      var ramreserved = document.getElementById('ram-reserved').value;
-      var rambuffer = document.getElementById('ram-buffer').value;
-      var processsize = document.getElementById('process-size').value;
-
-      
-
-      var buffer = 1 - (rambuffer / 100) ;
-
-      //[Total Available RAM] – [Reserved RAM] – [10% buffer] = [Available RAM for PHP]
-      var availableram = Math.round(((ramtotal - ramreserved) * buffer) * 10) / 10;
-      var availablerammb = Math.round(availableram * 1024);
-
-      // [Average Process Size] / [Available RAM for PHP]= [max_children]
-      var maxchildren =  Math.floor(availablerammb / processsize);
-      var startservers = Math.floor(maxchildren * 0.25);
-      var minspare = Math.floor(maxchildren * 0.25);
-      var maxspare = Math.floor(maxchildren * 0.75);
-
-
-        if (!isNaN(availableram)) {
-              //Outputs
-              //document.getElementById('ram-buffer-percent').value = buffer;
-              document.getElementById('ram-available').value = availableram;
-              document.getElementById('ram-available-mb').value = Math.round(availableram * 1024);
-              document.getElementById('max-children').value = maxchildren;
-              document.getElementById('start-servers').value = startservers;
-              document.getElementById('min-spare').value = minspare;
-              document.getElementById('max-spare').value = maxspare;
-            }
-          }
-</script>
-
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.0/rangeslider.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
