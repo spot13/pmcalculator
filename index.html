@@ -5,6 +5,7 @@
   <title>PHP-FPM Process Caluculator</title>
   <meta name="description" content="">
   <meta name="author" content="Chris Moore">
+  <meta name="author" content="Aysad Kozanoglu">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.0/rangeslider.min.css" />
@@ -85,6 +86,13 @@
      </div>
 
     </form>
+    <form name="form1" method="post" name="coptypaste" id="copypaste">
+  <div class="form-group">
+    <label for="settingsPoolsPhp">php pool settings / tuning</label>
+    <textarea class="form-control" name="copyPasteArea" id="copyPasteArea" rows="4"></textarea>
+    <button name="buttonCopy" id="buttonCopy" onClick="copyClipboard()" type="button" class="btn btn-success">Copy to Clipboard</button>
+  </div>
+    </form> 
    </div>
   </div>
  </div>
